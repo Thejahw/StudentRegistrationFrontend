@@ -1,0 +1,62 @@
+<img [src]="url" height="200">
+<input type="file" (change)="onSelectFile($event)">
+<br />
+
+<form class="example-form" [formGroup]="studentForm" (ngSubmit)="SaveStudent()">
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="firstName" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="lastName" formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Contact No</mat-label>
+        <input matInput placeholder="ContactNo" formControlName="contactNo">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>SSN</mat-label>
+        <input matInput placeholder="ssn" formControlName="ssn">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>DOB</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="DOB" formControlName="dob">
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="title" formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="date" formControlName="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Address1</mat-label>
+        <input matInput placeholder="PrimaryAdressLine" formControlName="PrimaryAdressLine">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Street</mat-label>
+        <input matInput placeholder="Street" formControlName="street">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput placeholder="City" formControlName="city">
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="Country" formControlName="country">
+    </mat-form-field>
+    <div class="button-row">
+        <button mat-raised-button color="primary">Save</button> | <a mat-raised-button (click)="ClosePopup()"
+            color="accent">Close</a>
+    </div>
+</form>
