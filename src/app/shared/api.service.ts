@@ -34,6 +34,6 @@ export class ApiService {
     return this.http.get<StudentWithId[]>(this.apiUrl+'/search/'+key);
   }
   SaveProfileImage(Id:any, image:any){
-    return this.http.post(this.apiUrl+'/'+Id,image);
+    return this.http.put(this.apiUrl+'/profile/'+Id,image);
   }
 }

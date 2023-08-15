@@ -14,4 +14,5 @@ export interface StudentWithId{
     Street: string,
     City: string,
     Country: string,
+    ImageUrl : string
 } 

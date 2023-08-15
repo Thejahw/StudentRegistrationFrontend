@@ -1,6 +1,8 @@
-<img [src]="url" height="200">
-<input type="file" (change)="onSelectFile($event)">
-<br />
+<div *ngIf="this.data.id != '' && this.data.id != null">
+    <img [src]="studentForm.get('url')?.value" height="150" >
+    <input type="file" (change)="onSelectFile($event)">
+    <br />
+</div>
 
 <form class="example-form" [formGroup]="studentForm" (ngSubmit)="SaveStudent()">
     <mat-form-field class="full-width" appearance="fill">

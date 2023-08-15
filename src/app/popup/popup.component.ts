@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../shared/api.service';
 import * as alertyfy from 'alertifyjs';
+import { StudentWithId } from '../Model/StudentWithId';
 
 
 @Component({
@@ -12,6 +13,7 @@ import * as alertyfy from 'alertifyjs';
 })
 export class PopupComponent implements OnInit {
   editData: any;
+  imdata: any;
   constructor(private builder: FormBuilder, private dialog: MatDialog, private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -19,7 +21,7 @@ export class PopupComponent implements OnInit {
     if (this.data.id != '' && this.data.id != null) {
       this.api.GetSudentById(this.data.id).subscribe(response => {
         this.editData = response;
-        console.log(this.editData);
+        console.log(this.editData.imageUrl);
 
         this.studentForm.patchValue({
           studentId: this.editData.studentId,
@@ -35,7 +37,7 @@ export class PopupComponent implements OnInit {
           street: this.editData.street,
           city: this.editData.city,
           country: this.editData.country,
-          url: "./assets/profile.jpg",
+          url: this.editData.imageUrl==''?'':this.editData.imageUrl,
         })
         this.url = this.studentForm.getRawValue().url;
       });
@@ -62,9 +64,12 @@ export class PopupComponent implements OnInit {
   })
 
   SaveStudent() {
+    debugger;
     if (this.studentForm.valid) {
       const editId = this.studentForm.getRawValue().studentId;
       if (editId != '' && editId != null) {
+        debugger;
+        this.studentForm.patchValue({url:''});
         this.api.UpdateStudent(editId, this.studentForm.getRawValue()).subscribe(response => {
           this.ClosePopup();
           alertyfy.success("Updated successfully.");
@@ -87,11 +92,16 @@ export class PopupComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
-        this.url = event.target.result;
+        this.studentForm.patchValue({
+          url : event.target.result,
+        });
         const formdata: FormData = new FormData();
-        formdata.append('url', e.target.files[0], "profile");
+        formdata.append('imageFile', e.target.files[0], "profile");
+        this.studentForm.patchValue({url:e.target.files[0]});
 
-        this.api.SaveProfileImage(1, formdata).subscribe(result => {
+        this.imdata = formdata;
+debugger;
+        this.api.SaveProfileImage(this.studentForm.getRawValue().studentId, formdata).subscribe(result => {
           alertyfy.success("Image Saved Successfully");
         })
       }

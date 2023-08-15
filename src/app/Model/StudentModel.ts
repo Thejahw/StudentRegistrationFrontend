@@ -13,4 +13,5 @@ export interface studentmodel{
     Street: string,
     City: string,
     Country: string,
+    ImageUrl : string
 } 

@@ -24,16 +24,17 @@ export class StudentComponent implements OnInit {
   studentdata!: studentmodel[];
   studentsdata!: StudentWithId[];
   finaldata:any;
-
+  url:any;
 
   ngOnInit(): void {
     this.getStudents();
-    
+    url: "./assets/profile.jpg";
   }
   search = this.builder.group({
     searchkey: this.builder.control(''),
   })
-  displayColumns:string[] = ["FirstName", "LastName", "ContactNo", "Email", "Ssn","Address", "Action"];
+
+  displayColumns:string[] = ["FirstName", "LastName", "ContactNo", "Email", "Ssn","Address","Image", "Action"];
   openPopup(id:any){
      const _popup = this.dialog.open(PopupComponent,{
       width: '1000px',
