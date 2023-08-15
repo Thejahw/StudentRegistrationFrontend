@@ -97,7 +97,8 @@ export class PopupComponent implements OnInit {
         });
         const formdata: FormData = new FormData();
         formdata.append('imageFile', e.target.files[0], "profile");
-        this.studentForm.patchValue({url:e.target.files[0]});
+        //this.studentForm.patchValue({url:e.target.files[0]});
+        //this.url = 
 
         this.imdata = formdata;
 debugger;
