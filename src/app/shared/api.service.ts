@@ -12,8 +12,8 @@ export class ApiService {
   constructor(private http:HttpClient ) { }
   apiUrl = 'https://localhost:7082/api/Student';
 
-  GetAllStudents():Observable<StudentWithId[]>{
-    return this.http.get<StudentWithId[]>(this.apiUrl);
+  GetAllStudents(pageNo:any, pageSize:any,orderby:any):Observable<StudentWithId[]>{
+    return this.http.get<StudentWithId[]>(this.apiUrl+'/'+pageNo+'/'+pageSize);
   }
   saveStudent(studentdata:any){
     return this.http.post(this.apiUrl, studentdata);

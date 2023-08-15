@@ -27,7 +27,7 @@ export class StudentComponent implements OnInit {
   url:any;
 
   ngOnInit(): void {
-    this.getStudents();
+    this.getStudents(0,10,null);
     url: "./assets/profile.jpg";
   }
   search = this.builder.group({
@@ -45,12 +45,12 @@ export class StudentComponent implements OnInit {
       }
      })
      _popup.afterClosed().subscribe(r=>{
-        this.getStudents();
+        this.getStudents(0,10,null);
      });   
   }
 
-  getStudents(){
-    this.api.GetAllStudents().subscribe(response=>{
+  getStudents(pageNo:any, pageSize:any,orderby:any){
+    this.api.GetAllStudents(pageNo,pageSize,orderby).subscribe(response=>{
       this.studentsdata = response;
       this.finaldata = new MatTableDataSource<StudentWithId>(this.studentsdata);
       this.finaldata.paginator = this._paginator;
@@ -65,7 +65,7 @@ export class StudentComponent implements OnInit {
   RemoveStudent(studentId:number){
     alertyfy.confirm("Remove Student", "Do You want to remove this student?",()=>{
       this.api.RemoveStudentById(studentId).subscribe(response=>{
-        this.getStudents();
+        this.getStudents(0,10,null);
       });
     }, function(){
 
@@ -80,4 +80,11 @@ export class StudentComponent implements OnInit {
       this.finaldata.sort = this._sort;
       });    
   }
+
+  pageHandeler(e: any){
+    debugger;
+    console.log(e);
+    this.getStudents(e.previousPageIndex,e.pageSize,null);
+  }
+
 }

@@ -64,11 +64,9 @@ export class PopupComponent implements OnInit {
   })
 
   SaveStudent() {
-    debugger;
     if (this.studentForm.valid) {
       const editId = this.studentForm.getRawValue().studentId;
       if (editId != '' && editId != null) {
-        debugger;
         this.studentForm.patchValue({url:''});
         this.api.UpdateStudent(editId, this.studentForm.getRawValue()).subscribe(response => {
           this.ClosePopup();
@@ -101,7 +99,6 @@ export class PopupComponent implements OnInit {
         //this.url = 
 
         this.imdata = formdata;
-debugger;
         this.api.SaveProfileImage(this.studentForm.getRawValue().studentId, formdata).subscribe(result => {
           alertyfy.success("Image Saved Successfully");
         })
